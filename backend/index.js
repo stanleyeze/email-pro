@@ -1,7 +1,8 @@
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const app = express(morgan("tiny"));
+const config = require("config");
+const app = express("morgan");
 
 //body passer middleware
 app.use(express.json());
@@ -11,7 +12,7 @@ app.use(helmet());
 
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
-  console.log("Morgan is enambled");
+  console.log("Morgan is enambled", config.get("name"));
 }
 
 app.get("/", (req, res) => {
